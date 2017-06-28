@@ -72,22 +72,11 @@ class Place(object):
             self.datasets = pd.DataFrame()
             for res in self._read_page(s):
                 self._parse_result(res)
-            #end_page_num = self._get_end_num(s)
-            #if end_page_num:
             self.link = self.link+'/browse'
             self.datasets['topics'] = self._read_all_pages()
-            #v = self.datasets['views']
-            #self.datasets['views_norm'] = v / np.linalg.norm(v, ord=np.inf)
             print('Completed: ' + self.name)
       
     def _read_all_pages(self):
-
-        #for num in range(start, end):
-        #for num in range(start, 10):
-        #    url = self._link_to_try + '&utf8=%E2%9C%93&page=' + str(num)
-        #    for result in self._read_page(self._get_soup(url)):
-        #        self._parse_result(result)
-        #    if num % 10 == 0: print('Completed page ' + str(num))
 
         pattern_ev = r'.+(?=/browse)'
         url_pre = re.findall(pattern_ev, self.link)[0]
@@ -150,23 +139,12 @@ class Place(object):
             'category': _find('a', 'category'),
             'type': _find('span', 'type-name'),
             'topics': None,
-            #'views': self._integer(_find('div', 'view-count-value')),
             'descrip': _find('div', 'description')
         }
-
-        #self.datasets['topcis'] = self._read_all_pages(self.link+'/browse')
 
         self.datasets = self.datasets.append(result_dict, ignore_index=True)
 
         return 
-
-    #@staticmethod
-    #def _get_end_num(page_soup):
-
-        #link = page_soup.find('a', {'class': 'lastLink'}).get('href')
-        #end_num = re.search(r".+&page=(\d+)", link).group(1)
-
-        #return int(end_num)
 
     @staticmethod
     def _integer(number_string):
@@ -193,7 +171,6 @@ def visit_all_sites(file_path='data/local_open_data_portals.csv'):
         print(row[1])
         new_place = Place(row[1].to_dict())
         all_places[new_place.name] = new_place
-        #print(all_places)
     socrata_places = {k: v for k, v in all_places.items()
         if (v.datasets is not None) and not v.datasets.empty}
 

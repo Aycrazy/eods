@@ -6,9 +6,14 @@ import urllib3
 
 
 def make_one_column(datasets, name):
-    return pd.concat([pd.Series(d) for d in datasets]).to_frame().rename(columns={0:name})
+    a = pd.concat([pd.Series(d).drop_duplicates() for d in datasets]).to_frame().rename(columns={0:name}).reset_index(drop=True)
+    return a
 
-
+def get_soup(url):
+        pm = urllib3.PoolManager()
+        def make_html(pm,url):
+            return pm.urlopen(url= url, method="GET").data
+        return bs4.BeautifulSoup(make_html(pm,url), 'html.parser')
 class Place(object):
 
     def __init__(self, input_dict):
@@ -54,25 +59,28 @@ class Place(object):
         return'%s' %(self.datasets)
 
     def _get_info(self):
-
+        print('getting info')
         try:
             s = self._get_soup(self.link+'/browse')
         except:
             return
         #else:
-        if self._is_socrata(s):
+        soc = self._is_socrata
+        print(soc)
+        if soc:
             print('Starting: ' + self.name)
             self.datasets = pd.DataFrame()
             for res in self._read_page(s):
                 self._parse_result(res)
-            end_page_num = self._get_end_num(s)
+            #end_page_num = self._get_end_num(s)
             #if end_page_num:
-            #self.datasets['topcis'] = self._read_all_pages(self.link+'/browse')
-            v = self.datasets['views']
-            self.datasets['views_norm'] = v / np.linalg.norm(v, ord=np.inf)
+            self.link = self.link+'/browse'
+            self.datasets['topics'] = self._read_all_pages()
+            #v = self.datasets['views']
+            #self.datasets['views_norm'] = v / np.linalg.norm(v, ord=np.inf)
             print('Completed: ' + self.name)
       
-    def _read_all_pages(url):
+    def _read_all_pages(self):
 
         #for num in range(start, end):
         #for num in range(start, 10):
@@ -84,12 +92,17 @@ class Place(object):
         pattern_ev = r'.+(?=/browse)'
         url_pre = re.findall(pattern_ev, self.link)[0]
 
-        soup = self._get_soup(url)
+        soup = self._get_soup(self.link)
 
         all_results = [url_pre+x['href'] for x in soup.find_all('a','pageLink') if x['href']]
 
-        data = [[x['href'].strip(url_pre) for x in bs4.BeautifulSoup(make_html(pm,results),'html.parser').find_all('a','browse2-result-name-link') if x['href']] for results in all_results]
+        print(all_results)
 
+        if not len(all_results):
+            return None
+
+        data = [[x['href'].strip(url_pre) for x in get_soup(results).find_all('a','browse2-result-name-link') if x['href']] for results in all_results]
+        print(self.name)
         return make_one_column(data, self.name)
 
     @staticmethod
@@ -102,11 +115,18 @@ class Place(object):
     @staticmethod
     def _is_socrata(page_soup):
 
-        def _is_comment(x): return isinstance(x, bs4.Comment)
+        def _is_comment(x): 
+            print('check comment')
+            return isinstance(x, bs4.Comment)
+
+        print('checking socrata')
 
         comments = page_soup.find_all(text=_is_comment)
 
-        return ('Powered by the Socrata Open Data Platform' in str(comments))
+        if ('Powered by the Socrata Open Data Platform' in str(comments)):
+            return True
+        else:
+            return False
 
     @staticmethod
     def _read_page(page_soup):
@@ -129,8 +149,8 @@ class Place(object):
             'name': _find('a', 'name-link'),
             'category': _find('a', 'category'),
             'type': _find('span', 'type-name'),
-            'topics': self._read_all_pages(self.link+'/browse'),
-            'views': self._integer(_find('div', 'view-count-value')),
+            'topics': None,
+            #'views': self._integer(_find('div', 'view-count-value')),
             'descrip': _find('div', 'description')
         }
 
@@ -140,13 +160,13 @@ class Place(object):
 
         return 
 
-    @staticmethod
-    def _get_end_num(page_soup):
+    #@staticmethod
+    #def _get_end_num(page_soup):
 
-        link = page_soup.find('a', {'class': 'lastLink'}).get('href')
-        end_num = re.search(r".+&page=(\d+)", link).group(1)
+        #link = page_soup.find('a', {'class': 'lastLink'}).get('href')
+        #end_num = re.search(r".+&page=(\d+)", link).group(1)
 
-        return int(end_num)
+        #return int(end_num)
 
     @staticmethod
     def _integer(number_string):
@@ -170,6 +190,7 @@ def visit_all_sites(file_path='data/local_open_data_portals.csv'):
     all_places_df = pd.read_csv(file_path)
     all_places = {}
     for row in all_places_df.iterrows():
+        print(row[1])
         new_place = Place(row[1].to_dict())
         all_places[new_place.name] = new_place
         #print(all_places)

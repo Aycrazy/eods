@@ -138,6 +138,7 @@ class Place(object):
             'name': _find('a', 'name-link'),
             'category': _find('a', 'category'),
             'type': _find('span', 'type-name'),
+            'views': self._integer(_find('div', 'view-count-value')),
             'topics': None,
             'descrip': _find('div', 'description')
         }
@@ -148,8 +149,8 @@ class Place(object):
 
     @staticmethod
     def _integer(number_string):
-
-        return int(number_string.replace(',', ''))
+        print(number_string)
+        return int(number_string.decode().replace(',',''))
 
     def make_csv(self, folder='output/'):
 

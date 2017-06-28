@@ -1,0 +1,11 @@
+category,descrip,name,topics,type
+b'Permitting',b'Data of approved building/construction permits',b'Approved Building Permits',Permitting/Approved-Building-Permits/msk6-43c6,b'Dataset'
+b'Public Safety',b'Crime Incident Reports provided by Boston Police Department\nPlease click here for most recent incidents: https://data.cityofboston.gov/Public-Safety/Crime-Incident-Reports-August-2015-To-Date-Source-/fqn4-4qap/data',b'Crime Incident Reports (July 2012 - August 2015) (Source: Legacy System)',Public-Safety/Crime-Incident-Reports-July-2012-August-2015-Sourc/7cdf-6fgx,b'Dataset'
+,b'assessment for all property for the year 2014',b'Property Assessment 2014',et/Property-Assessment-2014/qz7u-kb7x,b'Dataset'
+b'Finance',"b'All City of Boston employees earnings, calendar year 2014'",b'Employee Earnings Report 2014',Finance/Employee-Earnings-Report-2014/4swk-wcg8,b'Dataset'
+b'City Services',b'Constituent requests for city services',"b'311, Service Requests'",City-Services/311-Service-Requests/awu8-dc52,b'Dataset'
+b'Finance',b'Earnings for City of Boston Employees for calendar year 2015.',b'Employee Earnings Report 2015',Finance/Employee-Earnings-Report-2015/ah28-syw,b'Dataset'
+b'City Services',b'Constituent requests for city services',b'Closed Pothole Cases',City-Services/Closed-Pothole-Cases/wivc-syw7,b'Map'
+b'Health',b'Health inspections of licensed food establishments',b'Food Establishment Inspections',Health/Food-Establishment-Inspections/qndu-wx8w,b'Dataset'
+b'Finance',"b'All City of Boston employees earnings, calendar year 2013'",b'Employee Earnings Report 2013',Finance/Employee-Earnings-Report-2013/54s2-yx,b'Dataset'
+b'Finance',"b'All City of Boston employees earnings, calendar year 2012'",b'Employee Earnings Report 2012',Finance/Employee-Earnings-Report-2012/effb-uspk,b'Dataset'

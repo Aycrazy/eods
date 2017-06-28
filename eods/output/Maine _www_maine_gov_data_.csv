@@ -1,0 +1,11 @@
+category,descrip,name,topics,type
+b'Recreation',,b'Maine Lighthouses (Map)',s://data.maine.gov/Recreation/Maine-Lighthouses-Map-/6g2q-jb45,b'Map'
+,"b'Locations of animals killed by hunters data\nThe location, species, and date of all animals killed by hunters in the State of Maine from 2010 through 2012.'",b'IFW Kills',s://data.maine.gov/dataset/IFW-Kills/s4h2-3tcs,b'Dataset'
+b'Government',b'Locations of the Maine Veterans Services Offices',"b""Veterans' Services Offices""",s://data.maine.gov/Government/Veterans-Services-Offices/wpdm-pqz,b'Map'
+b'Finances',"b'Fiscal year expenses for Fiscal Year To Date 2011 by Agency, Fund and Appropriation'",b'State Expenses 2011',s://data.maine.gov/Finances/State-Expenses-2011/67b8-dqt7,b'Dataset'
+b'Finances',"b'Fiscal year expenses for Fiscal Year To Date 2010 by Agency, Fund and Appropriation'",b'State Expenses 2010',s://data.maine.gov/Finances/State-Expenses-2010/665x-hirk,b'Dataset'
+b'Finances',"b'Fiscal year expenses for 2004-2009 by Agency, Fund and Appropriation'",b'State-expenses-2004-2009',s://data.maine.gov/Finances/State-expenses-2004-2009/ttyy-h4n6,b'Dataset'
+b'Finances',"b'Fiscal year revenue for 2004-2009 by Agency, Fund, Appropriation and Revenue Source'",b'State Revenue 2004 2009',s://data.maine.gov/Finances/State-Revenue-2004-2009/38gk-4r2b,b'Dataset'
+b'Finances',"b'Fiscal year expenses for Fiscal Year To Date 2011 by Agency, Fund and Appropriation'",b'expense view',s://data.maine.gov/Finances/expense-view/gwxb-xmc,b'Filtered View'
+b'Government',b'Data last updated: 06/15/2009',b'Median Household Income data',s://data.maine.gov/Government/Median-Household-Income-data/9vns-fsf2,b'Dataset'
+b'Finances',"b'Fiscal year revenue for Fiscal Year To Date 2010 by Agency, Fund, Appropriation and Revenue Source'",b'State Revenue 2010',s://data.maine.gov/Finances/State-Revenue-2010/q59z-c,b'Dataset'

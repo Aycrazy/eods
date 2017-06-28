@@ -1,0 +1,11 @@
+category,descrip,name,topics,type
+b'Public Safety',b'A snapshot of Crime Incidents from the Honolulu Police Department',b'Crime Incidents',Public-Safety/Crime-Incidents/a96q-gyhq,b'Dataset'
+,,b'data',et/data/fes3-i9m,b'Filtered View'
+,b'Actual spending 2010&2011\nBudget 2012\nProposed Budget 2013',"b""Sam's View""",et/Sam-s-View/5fhm-vea5,b'Filtered View'
+b'Finance',b'Actual spending 2010&2011\nBudget 2012\nProposed Budget 2013',b'City spending',Finance/City-spending/std8-yakc,b'Dataset'
+b'Finance',b'Proposed City Budget for Fiscal Year 2014',b'Proposed FY14 Budget',Finance/Proposed-FY14-Budget/rh9s-z3m,b'Dataset'
+,b'Location and descriptions of public works of art',b'Public Art',et/Public-Art/yef5-h88r,b'Dataset'
+b'Transportation',,b'Abandoned Vehicles',Transportation/Abandoned-Vehicles/7mwf-c3z3,b'Dataset'
+b'Finance',,b'By Fund',Finance/By-Fund/mnxu-i8g7,b'Chart'
+b'Finance',b'Proposed City Budget for Fiscal Year 2015',b'Proposed FY15 Budget',Finance/Proposed-FY15-Budget/dw6j-5gaz,b'Dataset'
+b'Finance',b'Adopted Fiscal Year 2016 Budget',b'Adopted FY15 Budget',Finance/Adopted-FY15-Budget/utqy-e8,b'Dataset'

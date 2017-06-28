@@ -1,0 +1,11 @@
+category,descrip,name,topics,type
+,b'Checks written to pay for products and services received by the City.',b'drew',w/94sr-dmsy,b'Chart'
+b'Responsible Government',b'Checks written to pay for products and services received by the City.',b'Check Register',Responsible-Government/Check-Register/7v22-4z3,b'Dataset'
+,,b'Redmond Facilities Map',Redmond-Facilities-Map/tugv-zk5z,b'Map'
+b'Responsible Government',b'Shows credit card purchases.',b'Purchasing Card Transactions',Responsible-Government/Purchasing-Card-Transactions/vqdz-eefx,b'Dataset'
+,,b'Check Register Grouped by Payee',Check-Register-Grouped-by-Payee/4xwk-j2qj,b'Filtered View'
+b'Vibrant Economy',"b'Contains a snapshot view of issued permit data, updated monthly.'",b'Issued Permits',Vibrant-Economy/Issued-Permits/wzgk-,b'Dataset'
+,,b'Bar Chart showing check payments by payee',Bar-Chart-showing-check-payments-by-payee/3imt-pe6,b'Chart'
+,"b'Contains a snapshot of issued permit data, updated monthly.'",b'Issued_Permits_CDR',Issued_Permits_CDR/cp7w-w9h6,b'Filtered View'
+,,b'Pie Chart Checks Grouped by Payee',Pie-Chart-Checks-Grouped-by-Payee/7vm8-w63z,b'Chart'
+,"b'Contains a snapshot of issued permit data, updated monthly.'",b'Issued Bldg and Electrical Permits',Issued-Bldg-and-Electrical-Permits/bs2q-ismz,b'Filtered View'

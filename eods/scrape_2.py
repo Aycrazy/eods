@@ -175,7 +175,7 @@ class Place(object):
 
     def make_csv(self, folder='output/'):
 
-        file_name = re.sub(r"[\.\[\] (]", r"_", self.name).replace(')', '.csv')
+        file_name = re.sub(r"[\.\[\] (]", r"_", re.findall(r'.+(?=/browse)', self.name)[0]+'.csv')
         if self.datasets is not None:
             print('data is coming...')
             self.datasets.to_csv(folder + file_name, index=False)

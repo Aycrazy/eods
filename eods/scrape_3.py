@@ -67,14 +67,13 @@ class Place(object):
             return
         #else:
         soc = self._is_socrata
-        print(soc)
         if soc:
             print('Starting: ' + self.name)
             self.datasets = pd.DataFrame()
             for res in self._read_page(s):
                 self._parse_result(res)
             self.link = self.link+'/browse'
-            self.datasets['topics'] = self._read_all_pages('a', 'name-link', topic=True)
+            self.datasets['topics'] = self._get_tag_info('a', 'name-link', topic=True)
             print('Completed: ' + self.name)
      
     
@@ -92,9 +91,9 @@ class Place(object):
 
             return [self.link+x['href'] for x in soup.find_all('a','pageLink') if x['href']]
     
-    def _get_tag_info(self, tag_type, class_end, col, topic = False):
+    def _get_tag_info(self, tag_type, class_end, topic = False):
 
-        if not len(self.all_results):
+        if not self.all_results:
             return None
 
         if topic == True:
@@ -181,7 +180,6 @@ def visit_all_sites(file_path='data/local_open_data_portals.csv'):
     all_places_df = pd.read_csv(file_path)
     all_places = {}
     for row in all_places_df.iterrows():
-        print(row[1])
         new_place = Place(row[1].to_dict())
         all_places[new_place.name] = new_place
     socrata_places = {k: v for k, v in all_places.items()

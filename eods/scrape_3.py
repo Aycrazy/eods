@@ -25,6 +25,7 @@ class Place(object):
         self.policy = input_dict['Open Data Policy?']
         self.link = input_dict['Link']
         self.type = input_dict['Type']
+        self.all_results = None
 
         self.datasets = None
 
@@ -77,7 +78,7 @@ class Place(object):
             print('Completed: ' + self.name)
      
     
-    def _read_all_pages(self, tag_type, class_end, topic = False):
+    def _read_all_pages(self):
 
         pattern_ev = r'.+(?=/browse)'
 
@@ -85,24 +86,24 @@ class Place(object):
 
         try:
 
-            all_results = [re.findall(pattern_ev, self.link)[0]+x['href'] for x in soup.find_all('a','pageLink') if x['href']]
+            return [re.findall(pattern_ev, self.link)[0]+x['href'] for x in soup.find_all('a','pageLink') if x['href']]
 
         except:
 
-            all_results = [self.link+x['href'] for x in soup.find_all('a','pageLink') if x['href']]
+            return [self.link+x['href'] for x in soup.find_all('a','pageLink') if x['href']]
+    
+    def _get_tag_info(self, tag_type, class_end, col, topic = False):
 
-        print(all_results)
-
-        if not len(all_results):
+        if not len(self.all_results):
             return None
 
         if topic == True:
 
-            data = [[x['href'] for x in get_soup(results).find_all(tag_type,'browse2-result-'+class_end) if x['href']] for results in all_results]
+            data = [[x['href'] for x in get_soup(results).find_all(tag_type,'browse2-result-'+class_end) if x['href']] for results in self.all_results]
         else:
-            data = [[x.text for x in get_soup(results).find_all(tag_type,'browse2-result'+class_end) if x.text] for results in all_results]
+            data = [[x.text for x in get_soup(results).find_all(tag_type,'browse2-result'+class_end) if x.text] for results in self.all_results]
         #print(self.name)
-        return make_one_column(data, self.name)
+        return make_one_column(data, class_end)
 
     @staticmethod
     def _get_soup(url):
@@ -143,14 +144,15 @@ class Place(object):
             else:
                 return child_tag.text.strip().encode('utf-8')
 
+        self.all_results = self._read_all_pages()
         # TODO: handle cases where the title background is gray
         result_dict = {
-            'name': self._read_all_pages('a', 'name-link'),
-            'category': self._read_all_pages('a', 'category'),
-            'type': self._read_all_pages('span', 'type-name'),
+            'name': self._get_tag_info('a', 'name-link',),
+            'category': self._get_tag_info('a', 'category'),
+            'type': self._get_tag_info('span', 'type-name'),
             'views': self._integer(_find('div', 'view-count-value')),
             'topics': None,
-            'descrip': self._read_all_pages('div', 'description')
+            'descrip': self._get_tag_info('div', 'description')
         }
 
         self.datasets = self.datasets.append(result_dict, ignore_index=True)

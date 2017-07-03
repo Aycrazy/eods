@@ -1,14 +1,22 @@
-from selenium import webdriver
+import requests
+'''
+bibtex_id = '10.1007/s00425-007-0544-9'
 
-options = webdriver.ChromeOptions()
+url = "http://www.doi2bib.org/#/doi/{id}".format(id=bibtex_id)
+xhr_url = 'http://www.doi2bib.org/doi2bib'
 
-# tell selenium to use the dev channel version of chrome
-options.binary_location = '/usr/bin/chrome'
+with requests.Session() as session:
+    session.get(url)
 
-options.add_argument('headless')
+    response = session.get(xhr_url, params={'id': bibtex_id})
+    print(response.content)
 
-# set the window size
-options.add_argument('window-size=1200x600')
+'''
+da_no = 'https://data.boston.gov/dataset'
 
-# initialize the driver
-driver = webdriver.Chrome(chrome_options=options)
+with requests.Session() as session:
+    session.get('https://data.boston.gov/dataset')
+
+    response = session.get(da_no, params={'class': 'dataset_heading'})
+    print(response.content)
+

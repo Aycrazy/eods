@@ -72,7 +72,10 @@ class Place(object):
             self.datasets = pd.DataFrame()
             for res in self._read_page(s):
                 self._parse_result(res)
-            self.link = self.link+'/browse'
+            if self.link[-1] == '/':
+                self.link = self.link+'browse'
+            else:
+                self.link = self.link+'/browse'
             self.datasets['topics'] = self._get_tag_info('a', 'name-link', topic=True)
             print('Completed: ' + self.name)
      
@@ -100,7 +103,7 @@ class Place(object):
 
             data = [[x['href'] for x in get_soup(results).find_all(tag_type,'browse2-result-'+class_end) if x['href']] for results in self.all_results]
         else:
-            data = [[x.text for x in get_soup(results).find_all(tag_type,'browse2-result'+class_end) if x.text] for results in self.all_results]
+            data = [[x.text for x in get_soup(results).find_all(tag_type,'browse2-result-'+class_end) if x.text] for results in self.all_results]
         #print(self.name)
         return make_one_column(data, class_end)
 
